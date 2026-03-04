@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 Ano de Namoro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/padrao.css">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <a href="index.html"><img src="img/netflix.png" class="logo" alt="Netflix Logo"></a>
+        <ul class="nav-links">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#nos">Nós</a></li>
+            <li><a href="#momentos">Momentos</a></li>
+        </ul>
+
+    </nav>
+</header>
+
+<main>
+    <section class="hero" id="inicio">
+        <!-- imagem agora é um background através de CSS -->
+        <div class="hero-overlay">
+            <div class="buttons">
+                <button class="btn-play"><span class="play-icon">&#9658;</span>Assistir</button>
+                <button class="btn-info"><span class="info-icon">&#8505;</span>Mais informações</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="carousel-section" id="nos">
+        <h2 class="section-title">Nós</h2>
+        <div class="carousel">
+            <div class="wrap">
+                <img src="img/1.png" alt="">
+                <img src="img/2.png" alt="">
+                <img src="img/3.png" alt="">
+                <img src="img/4.png" alt="">
+                <img src="img/5.png" alt="">
+                <img src="img/1.png" alt="">
+                <img src="img/2.png" alt="">
+                <img src="img/3.png" alt="">
+                <img src="img/4.png" alt="">
+                <img src="img/5.png" alt="">
+            </div>
+        </div>
+    </section>
+
+    <!-- nova seção momentos -->
+    <section class="moments-section" id="momentos">
+        <h2 class="section-title">Momentos</h2>
+        <div class="moments-grid">
+            <div class="moment-item"><img src="img/momento (1).jpg" alt="Momento 1"></div>
+            <div class="moment-item"><img src="img/momento (2).jpg" alt="Momento 2"></div>
+            <div class="moment-item"><img src="img/momento (3).jpg" alt="Momento 3"></div>
+            <div class="moment-item"><img src="img/momento (4).jpg" alt="Momento 4"></div>
+            <div class="moment-item"><img src="img/momento (5).jpg" alt="Momento 5"></div>
+            <div class="moment-item"><img src="img/momento (6).jpg" alt="Momento 6"></div>
+            <div class="moment-item"><img src="img/momento (7).jpg" alt="Momento 7"></div>
+            <div class="moment-item"><img src="img/momento (8).jpg" alt="Momento 8"></div>
+            <div class="moment-item"><img src="img/momento (9).jpg" alt="Momento 9"></div>
+            <div class="moment-item"><img src="img/momento (10).jpg" alt="Momento 10"></div>
+            <div class="moment-item"><img src="img/momento (11).jpg" alt="Momento 11"></div>
+            <div class="moment-item"><img src="img/momento (12).jpg" alt="Momento 12"></div>
+            <div class="moment-item"><img src="img/momento (13).jpg" alt="Momento 13"></div>
+            <div class="moment-item"><img src="img/momento (14).jpg" alt="Momento 14"></div>
+            <div class="moment-item"><img src="img/momento (15).jpg" alt="Momento 15"></div>
+            <div class="moment-item"><img src="img/momento (16).jpg" alt="Momento 16"></div>
+            <div class="moment-item"><img src="img/momento (17).jpg" alt="Momento 17"></div>
+            <div class="moment-item"><img src="img/momento (18).jpg" alt="Momento 18"></div>
+            <div class="moment-item"><img src="img/momento (19).jpg" alt="Momento 19"></div>
+            <div class="moment-item"><img src="img/momento (20).jpg" alt="Momento 20"></div>
+            <div class="moment-item"><img src="img/momento (21).jpg" alt="Momento 21"></div>
+            <div class="moment-item"><video src="vid/momento (5).mp4" muted autoplay loop></video></div>
+            <div class="moment-item"><img src="img/momento (25).jpg" alt="Momento 22"></div>
+            <div class="moment-item"><video src="vid/momento (1).mp4" muted autoplay loop></video></div>
+            <div class="moment-item"><img src="img/momento (26).jpg" alt="Momento 23"></div>
+            <div class="moment-item"><video src="vid/momento (8).mp4" muted autoplay loop></video></div>
+            <div class="moment-item"><img src="img/momento (27).jpg" alt="Momento 24"></div>
+            <div class="moment-item"><img src="img/momento (28).jpg" alt="Momento 25"></div>
+            <div class="moment-item"><video src="vid/momento (2).mp4" muted autoplay loop></video></div>
+            <div class="moment-item"><img src="img/momento (29).jpg" alt="Momento 26"></div>
+            <div class="moment-item"><img src="img/momento (30).jpg" alt="Momento 27"></div>
+            <div class="moment-item"><video src="vid/momento (3).mp4" muted autoplay loop></video></div>
+            <div class="moment-item"><img src="img/momento (31).jpg" alt="Momento 28"></div>
+            <div class="moment-item"><img src="img/momento (32).jpg" alt="Momento 29"></div>
+            <div class="moment-item"><video src="vid/momento (6).mp4" muted autoplay loop></video></div>
+            <div class="moment-item"><img src="img/momento (33).jpg" alt="Momento 30"></div>
+            <div class="moment-item"><video src="vid/momento (4).mp4" muted autoplay loop></video></div>
+            <div class="moment-item"><img src="img/momento (34).jpg" alt="Momento 31"></div>
+            <div class="moment-item"><img src="img/momento (35).jpg" alt="Momento 32"></div>  
+        </div>
+    </section>
+
+</main>
+
+<!-- video modal -->
+<div id="videoModal">
+    <div class="modal-content">
+        <button class="close-btn" aria-label="Fechar vídeo">×</button>
+        <video id="heroVideo" controls>
+            <source src="vid/0303.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+
+<script>
+    const playButton = document.querySelector('.btn-play');
+    const modal = document.getElementById('videoModal');
+    const closeBtn = modal ? modal.querySelector('.close-btn') : null;
+    const video = document.getElementById('heroVideo');
+
+    function openModal() {
+        if (!modal) return;
+        modal.classList.add('active');
+        if (video) {
+            video.currentTime = 0;
+            video.play().catch(() => {});
+        }
+    }
+
+    function closeModal() {
+        if (!modal) return;
+        modal.classList.remove('active');
+        if (video) {
+            video.pause();
+            video.currentTime = 0;
+        }
+    }
+
+    if (playButton) {
+        playButton.addEventListener('click', openModal);
+    }
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+    }
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
