@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="css/padrao.css">
 </head>
 <body>
+<!-- Netflix-style intro container -->
+<div id="netflix-intro" class="netflix-intro-container">
+    <div class="netflix-logo">
+        <span class="netflix-n">N</span>
+    </div>
+</div>
+
+<!-- Main site content - initially hidden -->
+<div id="main-content" class="main-content">
 <header>
     <nav class="navbar">
         <a href="index.html"><img src="img/netflix.png" class="logo" alt="Netflix Logo"></a>
@@ -28,6 +37,14 @@
                 <button class="btn-play"><span class="play-icon">&#9658;</span>Assistir</button>
                 <button class="btn-info"><span class="info-icon">&#8505;</span>Mais informações</button>
             </div>
+        </div>
+    </section>
+
+    <!-- Botões para mobile fora da imagem -->
+    <section class="hero-buttons-mobile">
+        <div class="buttons">
+            <button class="btn-play"><span class="play-icon">&#9658;</span>Assistir</button>
+            <button class="btn-info"><span class="info-icon">&#8505;</span>Mais informações</button>
         </div>
     </section>
 
@@ -96,6 +113,8 @@
     </section>
 
 </main>
+</div>
+<!-- End of main-content -->
 
 <!-- video modal -->
 <div id="videoModal">
@@ -108,7 +127,7 @@
 </div>
 
 <script>
-    const playButton = document.querySelector('.btn-play');
+    const playButtons = document.querySelectorAll('.btn-play');
     const modal = document.getElementById('videoModal');
     const closeBtn = modal ? modal.querySelector('.close-btn') : null;
     const video = document.getElementById('heroVideo');
@@ -131,9 +150,11 @@
         }
     }
 
-    if (playButton) {
-        playButton.addEventListener('click', openModal);
-    }
+    // Adicionar event listener a todos os botões play
+    playButtons.forEach(button => {
+        button.addEventListener('click', openModal);
+    });
+    
     if (closeBtn) {
         closeBtn.addEventListener('click', closeModal);
     }
@@ -144,6 +165,31 @@
             }
         });
     }
+    
+    // Netflix intro animation
+    document.addEventListener('DOMContentLoaded', function() {
+        const introContainer = document.getElementById('netflix-intro');
+        const mainContent = document.getElementById('main-content');
+        
+        // Ensure main content is hidden initially
+        mainContent.style.opacity = '0';
+        
+        // Start the intro animation sequence
+        setTimeout(() => {
+            introContainer.classList.add('start-animation');
+        }, 150);
+        
+        // Remove intro and show main content after animation completes
+        setTimeout(() => {
+            introContainer.classList.add('fade-out');
+            
+            setTimeout(() => {
+                introContainer.remove();
+                mainContent.style.opacity = '1';
+                mainContent.style.transition = 'opacity 0.4s ease-in-out';
+            }, 500);
+        }, 2600);
+    });
 </script>
 
 </body>
