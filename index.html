@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="css/padrao.css">
 </head>
 <body>
+<!-- Netflix-style intro container -->
+<div id="netflix-intro" class="netflix-intro-container">
+    <div class="netflix-logo">
+        <span class="netflix-n">N</span>
+    </div>
+</div>
+
+<!-- Main site content - initially hidden -->
+<div id="main-content" class="main-content">
 <header>
     <nav class="navbar">
         <a href="index.html"><img src="img/netflix.png" class="logo" alt="Netflix Logo"></a>
@@ -22,6 +31,7 @@
 
 <main>
     <section class="hero" id="inicio">
+        <!-- imagem agora é um background através de CSS -->
         <div class="hero-overlay">
             <div class="buttons">
                 <button class="btn-play"><span class="play-icon">&#9658;</span>Assistir</button>
@@ -29,7 +39,15 @@
             </div>
         </div>
     </section>
-    <div class="normal"></div>
+
+    <!-- Botões para mobile fora da imagem -->
+    <section class="hero-buttons-mobile">
+        <div class="buttons">
+            <button class="btn-play"><span class="play-icon">&#9658;</span>Assistir</button>
+            <button class="btn-info"><span class="info-icon">&#8505;</span>Mais informações</button>
+        </div>
+    </section>
+
     <section class="carousel-section" id="nos">
         <h2 class="section-title">Nós</h2>
         <div class="carousel">
@@ -48,8 +66,9 @@
         </div>
     </section>
 
+    <!-- nova seção momentos -->
     <section class="moments-section" id="momentos">
-        <h2 class="section-title2">Momentos</h2>
+        <h2 class="section-title">Momentos</h2>
         <div class="moments-grid">
             <div class="moment-item"><img src="img/momento (1).jpg" alt="Momento 1"></div>
             <div class="moment-item"><img src="img/momento (2).jpg" alt="Momento 2"></div>
@@ -94,7 +113,10 @@
     </section>
 
 </main>
+</div>
+<!-- End of main-content -->
 
+<!-- video modal -->
 <div id="videoModal">
     <div class="modal-content">
         <button class="close-btn" aria-label="Fechar vídeo">×</button>
@@ -105,7 +127,7 @@
 </div>
 
 <script>
-    const playButton = document.querySelector('.btn-play');
+    const playButtons = document.querySelectorAll('.btn-play');
     const modal = document.getElementById('videoModal');
     const closeBtn = modal ? modal.querySelector('.close-btn') : null;
     const video = document.getElementById('heroVideo');
@@ -128,9 +150,11 @@
         }
     }
 
-    if (playButton) {
-        playButton.addEventListener('click', openModal);
-    }
+    // Adicionar event listener a todos os botões play
+    playButtons.forEach(button => {
+        button.addEventListener('click', openModal);
+    });
+    
     if (closeBtn) {
         closeBtn.addEventListener('click', closeModal);
     }
@@ -141,6 +165,31 @@
             }
         });
     }
+    
+    // Netflix intro animation
+    document.addEventListener('DOMContentLoaded', function() {
+        const introContainer = document.getElementById('netflix-intro');
+        const mainContent = document.getElementById('main-content');
+        
+        // Ensure main content is hidden initially
+        mainContent.style.opacity = '0';
+        
+        // Start the intro animation sequence
+        setTimeout(() => {
+            introContainer.classList.add('start-animation');
+        }, 150);
+        
+        // Remove intro and show main content after animation completes
+        setTimeout(() => {
+            introContainer.classList.add('fade-out');
+            
+            setTimeout(() => {
+                introContainer.remove();
+                mainContent.style.opacity = '1';
+                mainContent.style.transition = 'opacity 0.4s ease-in-out';
+            }, 500);
+        }, 2600);
+    });
 </script>
 
 </body>
