@@ -36,7 +36,7 @@
                 <!-- imagem agora é um background através de CSS -->
                 <div class="hero-overlay">
                     <div class="buttons">
-                        <button class="btn-play"><span class="play-icon">&#9658;</span>Assistir</button>
+                        <button class="btn-play"><span class="play-icon">&#9658;</span>Assistir trailer</button>
                         <button class="btn-info"><span class="info-icon">&#8505;</span>Mais informações</button>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
             <!-- Botões para mobile fora da imagem -->
             <section class="hero-buttons-mobile">
                 <div class="buttons">
-                    <button class="btn-play"><span class="play-icon">&#9658;</span>Assistir</button>
+                    <button class="btn-play"><span class="play-icon">&#9658;</span>Assistir trailer</button>
                     <button class="btn-info"><span class="info-icon">&#8505;</span>Mais informações</button>
                 </div>
             </section>
@@ -131,27 +131,27 @@
         </div>
     </div>
 
-    <!-- modal de mais informações 3D -->
-    <div id="info3DModal" class="info-3d-modal">
-        <div class="info-3d-card">
-            <button class="close-info-btn" aria-label="Fechar caixa de informações">×</button>
-            <h3>Mais informações</h3>
-            <p>Meu amor, a nossa história juntos está apenas começando, dês do primeiro dia em que eu te vi, meu coração
-                pulsou com mais intensidade. 1 ano, 12 meses, 365 dias, 8.760 horas, 525.600 minutos divindo a vida ao
-                seu lado e aprendendo o que é o amor, na prática. Eu te amo minha princesinha! </p>
-            <p
-                style="margin-top:16px; font-size:1.05rem; color:#fff; text-align:center; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px;">
-                <span id="time-counter"></span></p>
+    <!-- info modal 3D -->
+    <div id="infoModal" class="info-modal-container">
+        <div class="info-modal-3d">
+            <button class="close-info-btn" aria-label="Fechar informações">×</button>
+            <div class="info-content">
+                <h2>Nosso Tempo Juntos</h2>
+                <p>No dia 18 de Abril de 2025, começamos a escrever nossa história juntos. Hoje estamos aqui para
+                    celebrar nosso primeiro ano de namoro, de muitos que virão. 365 dias que se passaram em um piscar de
+                    olhos, mas que foram repletos de amor, risadas, carinho e momentos que guardarei para sempre em meu
+                    coração. Eu te amo!</p>
+                <div id="time-counter" class="time-counter">
+                    <!-- counter will be injected here -->
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         const playButtons = document.querySelectorAll('.btn-play');
-        const infoButtons = document.querySelectorAll('.btn-info');
         const modal = document.getElementById('videoModal');
-        const infoModal = document.getElementById('info3DModal');
         const closeBtn = modal ? modal.querySelector('.close-btn') : null;
-        const closeInfoBtn = infoModal ? infoModal.querySelector('.close-info-btn') : null;
         const video = document.getElementById('heroVideo');
 
         function openModal() {
@@ -188,70 +188,81 @@
             });
         }
 
-        function openInfo() {
+        // Lógica do Modal de Informações (3D)
+        const infoButtons = document.querySelectorAll('.btn-info');
+        const infoModal = document.getElementById('infoModal');
+        const closeInfoBtn = infoModal ? infoModal.querySelector('.close-info-btn') : null;
+
+        function openInfoModal() {
             if (!infoModal) return;
-            infoModal.classList.add('active');
+            infoModal.style.display = 'flex'; // Usando display flex para centralizar
+            // Delay pequeno para permitir que a transição de CSS ocorra corretamente
+            setTimeout(() => {
+                infoModal.classList.add('active');
+            }, 10);
         }
 
-        function closeInfo() {
+        function closeInfoModal() {
             if (!infoModal) return;
             infoModal.classList.remove('active');
+            // Espera a animação acabar para dar display none
+            setTimeout(() => {
+                infoModal.style.display = 'none';
+            }, 300);
         }
 
         infoButtons.forEach(button => {
-            button.addEventListener('click', openInfo);
+            button.addEventListener('click', openInfoModal);
         });
 
         if (closeInfoBtn) {
-            closeInfoBtn.addEventListener('click', closeInfo);
+            closeInfoBtn.addEventListener('click', closeInfoModal);
         }
+
         if (infoModal) {
             infoModal.addEventListener('click', function (e) {
                 if (e.target === infoModal) {
-                    closeInfo();
+                    closeInfoModal();
                 }
             });
         }
 
-        // Contador de tempo juntos
+        // Lógica do Contador de Tempo
+        const startDate = new Date('2025-04-18T00:00:00');
         function updateCounter() {
-            const startDate = new Date(2025, 3, 18); // 18 de Abril de 2025 (Mês 3 = Abril, o índice começa do 0)
             const now = new Date();
 
+            if (now < startDate) return;
+
             let years = now.getFullYear() - startDate.getFullYear();
-            let months = now.getMonth() - startDate.getMonth();
-            let days = now.getDate() - startDate.getDate();
+            let anniversary = new Date(startDate);
+            anniversary.setFullYear(now.getFullYear());
 
-            if (days < 0) {
-                months--;
-                const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-                days += prevMonth.getDate();
-            }
-            if (months < 0) {
+            // Se ainda não chegou o aniversário deste ano, subtrai 1 ano
+            if (now < anniversary) {
                 years--;
-                months += 12;
+                anniversary.setFullYear(now.getFullYear() - 1);
             }
 
-            const diff = now - startDate;
-            const counterElement = document.getElementById('time-counter');
+            // Diferença em ms a partir do último aniversário
+            const diff = now - anniversary;
 
-            if (diff > 0 && counterElement) {
-                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-                const minutes = Math.floor((diff / 1000 / 60) % 60);
-                const seconds = Math.floor((diff / 1000) % 60);
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
 
-                let timeString = 'Juntos há: <br>';
-                if (years > 0) timeString += `<strong>${years}</strong> ano${years > 1 ? 's' : ''}, `;
-                if (months > 0 || years > 0) timeString += `<strong>${months}</strong> ${months === 1 ? 'mês' : 'meses'}, `;
-                timeString += `<strong>${days}</strong> dia${days !== 1 ? 's' : ''}, `;
-                timeString += `<strong>${hours.toString().padStart(2, '0')}</strong>h `;
-                timeString += `<strong>${minutes.toString().padStart(2, '0')}</strong>m `;
-                timeString += `<strong>${seconds.toString().padStart(2, '0')}</strong>s`;
-
-                counterElement.innerHTML = timeString;
+            const counterEl = document.getElementById('time-counter');
+            if (counterEl) {
+                counterEl.innerHTML = `
+                    <div class="time-unit"><span class="time-value">${years}</span><span class="time-label">${years === 1 ? 'Ano' : 'Anos'}</span></div>
+                    <div class="time-unit"><span class="time-value">${days}</span><span class="time-label">Dias</span></div>
+                    <div class="time-unit"><span class="time-value">${hours}</span><span class="time-label">Horas</span></div>
+                    <div class="time-unit"><span class="time-value">${minutes}</span><span class="time-label">Min</span></div>
+                    <div class="time-unit"><span class="time-value">${seconds}</span><span class="time-label">Seg</span></div>
+                `;
             }
         }
-
         setInterval(updateCounter, 1000);
         updateCounter();
 
