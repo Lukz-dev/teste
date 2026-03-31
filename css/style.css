@@ -1235,11 +1235,13 @@ As regras do @media(max-width:768px) e @media(max-width:480px) já cobrem esses 
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.85);
-    display: none; /* Alterado pelo JS para flex na abertura */
+    display: none;
+    /* Alterado pelo JS para flex na abertura */
     justify-content: center;
     align-items: center;
     z-index: 3000;
-    perspective: 1000px; /* Ativação do espaço 3D */
+    perspective: 1000px;
+    /* Ativação do espaço 3D */
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -1255,7 +1257,7 @@ As regras do @media(max-width:768px) e @media(max-width:480px) já cobrem esses 
     padding: 40px;
     width: 90%;
     max-width: 500px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 25px rgba(229, 9, 20, 0.3);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(229, 9, 20, 0.3);
     /* Inicia rotacionado para dar efeito que está aparecendo do fundo */
     transform: rotateX(30deg) rotateY(-10deg) scale(0.8);
     opacity: 0;
@@ -1290,7 +1292,8 @@ As regras do @media(max-width:768px) e @media(max-width:480px) já cobrem esses 
 }
 
 .close-info-btn:hover {
-    background: #e50914; /* Vermelho Netflix */
+    background: #e50914;
+    /* Vermelho Netflix */
 }
 
 .info-content h2 {
